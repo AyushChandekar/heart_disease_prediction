@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import Image from "next/image"
 import HeartDiseaseForm from "@/components/heart-disease-form"
 import { Loader2 } from "lucide-react"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <div className="relative w-8 h-8">
               <Image
-                src="/placeholder.svg?height=32&width=32"
+                src="/placeholder.png?height=50&width=50"
                 alt="Heart Health Logo"
                 fill
                 className="object-contain"
@@ -24,7 +25,7 @@ export default function Home() {
           <nav>
             <ul className="flex gap-6">
               <li>
-                <a href="#" className="text-sm font-medium text-slate-600 hover:text-teal-500 transition-colors">
+                <a href="#Home" className="text-sm font-medium text-slate-600 hover:text-teal-500 transition-colors">
                   Home
                 </a>
               </li>
@@ -34,9 +35,9 @@ export default function Home() {
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-teal-500 transition-colors">
+                <Link href="/faq" className="text-sm font-medium text-slate-600 hover:text-teal-500 transition-colors">
                   FAQ
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -105,6 +106,13 @@ export default function Home() {
               consult with a healthcare provider for proper diagnosis and treatment.
             </p>
             
+            <div className="bg-teal-50 border-l-4 border-teal-500 p-4 mt-6">
+              <p className="text-sm text-teal-700">
+                <strong>Important:</strong> This is a screening tool only and not a diagnostic device. The results
+                should be discussed with a qualified healthcare professional.
+              </p>
+            </div>
+            
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
                 <h3 className="text-lg font-medium text-teal-600 mb-2">Exercise Advice</h3>
@@ -120,13 +128,12 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="bg-teal-50 border-l-4 border-teal-500 p-4 mt-6">
-              <p className="text-sm text-teal-700">
-                <strong>Important:</strong> This is a screening tool only and not a diagnostic device. The results
-                should be discussed with a qualified healthcare professional.
-              </p>
+            <div className="text-center mt-6">
+              <Link href="/faq" className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700">
+                Visit our FAQ for detailed explanations of health parameters
+              </Link>
             </div>
-
+            
             <div className="mt-8 pt-8 border-t border-slate-200">
               <h3 className="text-xl font-semibold mb-4 text-slate-800">Project Team</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
