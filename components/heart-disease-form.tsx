@@ -78,47 +78,48 @@ export default function HeartDiseaseForm() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    setError(null)
-  
-    try {
-      const response = await fetch('http://localhost:5000/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...values,
-          sex: Number(values.sex),
-          chestPainType: Number(values.chestPainType),
-          fastingBS: Number(values.fastingBS),
-          restingECG: Number(values.restingECG),
-          exerciseAngina: Number(values.exerciseAngina),
-          stSlope: Number(values.stSlope),
-          majorVessels: Number(values.majorVessels),
-          thalassemia: Number(values.thalassemia),
-        }),
-      })
-  
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      
-      const result = await response.json()
-      
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      
-      setPredictionResult(result)
-    } catch (error) {
-      console.error("Prediction error:", error)
-      setError(error instanceof Error ? error.message : 'An error occurred connecting to the prediction server. Make sure the backend is running.');
+ async function onSubmit(values: z.infer<typeof formSchema>) {
+  setIsLoading(true);
+  setError(null);
+
+  try {
+    const response = await fetch('https://heart-disease-backend-u309.onrender.com/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...values,
+        sex: Number(values.sex),
+        chestPainType: Number(values.chestPainType),
+        fastingBS: Number(values.fastingBS),
+        restingECG: Number(values.restingECG),
+        exerciseAngina: Number(values.exerciseAngina),
+        stSlope: Number(values.stSlope),
+        majorVessels: Number(values.majorVessels),
+        thalassemia: Number(values.thalassemia),
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-  
-    setIsLoading(false)
+
+    const result = await response.json();
+
+    if (result.error) {
+      throw new Error(result.error);
+    }
+
+    setPredictionResult(result);
+  } catch (error) {
+    console.error("Prediction error:", error);
+    setError(error instanceof Error ? error.message : 'An error occurred connecting to the prediction server. Make sure the backend is running.');
   }
+
+  setIsLoading(false);
+}
+
   
 
   return (
